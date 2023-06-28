@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="card pt-2">
+        <div class="row">
+            <div class="col-md-6  ">
+                <form #categoryForm="ngForm" (ngSubmit)="addcategory(categoryForm)">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Category Name</mat-label>
+                        <input matInput placeholder="Category Name" [(ngModel)]="category.categoryName" name="categoryName">
+
+
+                    </mat-form-field>
+                    <div align="end">
+                        
+                        <button type="submit" mat-stroked-button color="primary" *ngIf="isNewCategory" routerLink="/category">addCategory</button>
+                        <!-- <button type="submit" mat-stroked-button color="primary" *ngIf="!isNewCategory" routerLink="/category">updateCategory</button> -->
+                         <!-- <button  mat-stroked-button color="primary" *ngIf="!isNewCategory" routerLink="/category">gotoaddCategory</button> -->
+
+
+
+                    </div>
+                </form>
+
+            </div>
+            <div class="col-6">
+                <table mat-table [dataSource]="categoryDetails" class="mat-elevation-z8">
+
+                   
+                    <ng-container matColumnDef="Id">
+                      <th mat-header-cell *matHeaderCellDef> Id </th>
+                      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                    </ng-container>
+                  
+                    <ng-container matColumnDef="Category Name">
+                      <th mat-header-cell *matHeaderCellDef> Category Name </th>
+                      <td mat-cell *matCellDef="let element"> {{element.categoryName}} </td>
+                    </ng-container>
+
+                    <!-- edit column -->
+
+                    <ng-container matColumnDef="Edit">
+                        <th mat-header-cell *matHeaderCellDef> Edit </th>
+                        <td mat-cell *matCellDef="let element">
+                            <button mat-icon-button color="primary" (click)="editCategory(element.id)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+                    
+                    <!-- delete column -->
+                    
+                    <ng-container matColumnDef="Delete">
+                        <th mat-header-cell *matHeaderCellDef> Delete </th>
+                        <td mat-cell *matCellDef="let element">
+                            <button mat-icon-button color="warn" (click)="deleteCategory(element.id)">
+                                <mat-icon>delete</mat-icon></button>
+                    
+                        </td>
+                    </ng-container>
+                   
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+            </div>
+        </div>
+    </div>
+
+</div>
