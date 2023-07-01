@@ -6,6 +6,7 @@ import { Category } from '../model/category.model';
   providedIn: 'root'
 })
 export class CategoryService {
+ // PATH_OF_API = 'http://localhost:8080';
 
   constructor(private httpClient:HttpClient) { }
   

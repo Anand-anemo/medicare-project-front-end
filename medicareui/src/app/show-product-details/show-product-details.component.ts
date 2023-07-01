@@ -34,6 +34,13 @@ export class ShowProductDetailsComponent implements OnInit {
     this.getProduct();
 
   }
+
+  searchByKeyword(searchkeyword) {
+    console.log(searchkeyword);
+    this.pageNumber = 0;
+    this.productDetails = [];
+    this.getProduct(searchkeyword);
+  }
   // public getAllProducts() {
   //   this.showTable = false;
   //   this.productService.getAllProducts(this.pageNumber).subscribe(
@@ -57,11 +64,17 @@ export class ShowProductDetailsComponent implements OnInit {
 
   //   );
   // }
-  public getProduct(){
-    this.productService.getProduct().pipe(map((x:Product[],i)=>x.map((product:Product)=>this.imageProcessingService.createImages(product)))).subscribe({
+  public getProduct(searchKeyword: string = ""){
+    this.showTable = false;
+    this.productService.getProduct(this.pageNumber, searchKeyword).pipe(map((x:Product[],i)=>x.map((product:Product)=>this.imageProcessingService.createImages(product)))).subscribe({
       next:(res:any)=>{console.log(res)
       res.forEach(product=>this.productDetails.push(product));
-    this.showTable=true},
+    this.showTable=true
+    if(res.length == 12) {
+      this.showLoadMoreProductButton = true;
+    } else {
+      this.showLoadMoreProductButton = false;
+    }},
       error:(err)=>console.log(err),
       complete:()=>console.log('complete')
     })
@@ -98,9 +111,9 @@ export class ShowProductDetailsComponent implements OnInit {
 
   }
 
-  // loadMoreProduct() {
-  //   this.pageNumber = this.pageNumber + 1;
-  //   this.getAllProducts();
-  // }
+  loadMoreProduct() {
+    this.pageNumber = this.pageNumber + 1;
+    this.getProduct();
+  }
 
 }

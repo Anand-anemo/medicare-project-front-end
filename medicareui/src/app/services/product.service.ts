@@ -17,8 +17,8 @@ export class ProductService {
   // public getAllProducts(pageNumber , searchKeyword: string = ""){
   //   return this.httpClient.get<Product[]>("http://localhost:8080/getAllProducts?pageNumber="+ pageNumber+"&searchKey="+searchKeyword);
   // }
-  public getProduct(){
-    return this.httpClient.get<Product[]>("http://localhost:8080/product/");
+  public getProduct(pageNumber , searchKeyword: string = ""){
+    return this.httpClient.get<Product[]>("http://localhost:8080/product/?pageNumber="+ pageNumber+"&searchKey="+searchKeyword);
   }
 
   public deleteProduct(productId:any){
@@ -34,7 +34,19 @@ export class ProductService {
   public getProductDetails(isSingleProductCheckout, productId) {
     return this.httpClient.get<Product[]>("http://localhost:8080/product/getProductDetails/"+isSingleProductCheckout+"/"+productId);
   }
-  public placeOrder(orderDetails: OrderDetails) {
-    return this.httpClient.post("http://localhost:8080/placeOrder", orderDetails);
+  public placeOrder(orderDetails: OrderDetails , isCartCheckout) {
+    return this.httpClient.post("http://localhost:8080/placeOrder/"+isCartCheckout, orderDetails);
+  }
+
+  public addToCart(productId) {
+    return this.httpClient.get("http://localhost:8080/addToCart/"+productId);
+  }
+
+  public getCartDetails() {
+    return this.httpClient.get("http://localhost:8080/getCartDetails");
+  }
+
+  public deleteCartItem(cartId) {
+    return this.httpClient.delete("http://localhost:8080/deleteCartItem/"+cartId);
   }
 }

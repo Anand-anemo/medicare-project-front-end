@@ -36,6 +36,8 @@ import { CategoryComponent } from './category/category.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ShowProductImageDialogComponent } from './show-product-image-dialog/show-product-image-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { RegisterComponent } from './register/register.component';
+import { CartComponent } from './cart/cart.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +54,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     OrderConfirmationComponent,
     CategoryComponent,
     ShowProductImageDialogComponent,
+    RegisterComponent,
+    CartComponent,
    
   ],
   imports: [

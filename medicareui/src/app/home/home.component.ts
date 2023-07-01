@@ -12,42 +12,53 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
 
-  pageNumber:number = 0;
-  showLoadButton=false;
+  pageNumber: number = 0;
+  showLoadButton = false;
 
-  productData=[];
+  productData = [];
 
-  constructor(private productService:ProductService , private imageProcessingService: ImageProcessingService,
-    private router: Router){
+  constructor(private productService: ProductService, private imageProcessingService: ImageProcessingService,
+    private router: Router) {
 
   }
   ngOnInit(): void {
-     this.getProduct();
+    this.getProduct();
   }
 
-  public getProduct(){
-    this.productService.getProduct().pipe(map((x:Product[],i)=>x.map((product:Product)=>this.imageProcessingService.createImages(product)))).subscribe({
-      next:(res:any)=>{console.log(res)
-      this.productData=res;
-    },
-      error:(err)=>console.log(err),
-      complete:()=>console.log('complete')
-    })
+  searchByKeyword(searchkeyword) {
+    console.log(searchkeyword);
+    this.pageNumber = 0;
+    this.productData = [];
+    this.getProduct(searchkeyword);
+  }
+
+  public getProduct(searchKey: string = "") {
+    this.productService.getProduct(this.pageNumber, searchKey)
+      .pipe(map((x: Product[], i) => x.map((product: Product) => this.imageProcessingService.createImages(product))))
+      .subscribe({
+        next: (res: any) => {
+          console.log(res)
+         // this.productData = res;
+          if (res.length == 12) {
+            this.showLoadButton = true;
+          } else {
+            this.showLoadButton = false;
+          }
+          res.forEach(p => this.productData.push(p));
+        },
+        error: (err) => console.log(err),
+        complete: () => console.log('complete')
+      });
   }
 
 
-  // searchByKeyword(searchkeyword) {
-  //   console.log(searchkeyword);
-  //   this.pageNumber = 0;
-  //   this.productDetails = [];
-  //   this.getAllProducts(searchkeyword);
-  // }
+  
 
   // public getAllProducts(searchKey: string=""){
   //   this.productService.getAllProducts(this.pageNumber , searchKey)
-    
+
   //   .pipe(
   //     map((x: Product[], i) => x.map((product: Product) => this.imageProcessingService.createImages(product)))
   //   )
@@ -60,8 +71,8 @@ export class HomeComponent implements OnInit{
   //         this.showLoadButton = false;
   //       }
   //       resp.forEach(p=> this.productDetails.push(p));
-        
-        
+
+
   //     },(error: HttpErrorResponse)=> {
   //       console.log(error);
   //     }
@@ -69,15 +80,15 @@ export class HomeComponent implements OnInit{
   //   );
   // }
 
-  showProductDetails(productId){
+  showProductDetails(productId) {
 
-    this.router.navigate(['/productViewDetails',{productId: productId}]);
+    this.router.navigate(['/productViewDetails', { productId: productId }]);
 
   }
-  // public loadMoreProduct() {
-  //   this.pageNumber = this.pageNumber + 1;
-  //   this.getAllProducts();
-  // }
+  public loadMoreProduct() {
+    this.pageNumber = this.pageNumber + 1;
+    this.getProduct();
+  }
 
 
 }

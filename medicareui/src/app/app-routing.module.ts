@@ -15,6 +15,8 @@ import { BuyProductResolverService } from './buy-product-resolver.service';
 import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
 import { CategoryComponent } from './category/category.component';
 import { CategoryResolverService } from './services/category-resolver.service';
+import { RegisterComponent } from './register/register.component';
+import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [
   {
@@ -55,6 +57,12 @@ const routes: Routes = [
     path:'category' , component: CategoryComponent , resolve:{
       category: CategoryResolverService
     }
+  },
+  {
+    path:'register' , component:RegisterComponent
+  },
+  {
+    path:'cart', component:CartComponent
   }
   
 ];
