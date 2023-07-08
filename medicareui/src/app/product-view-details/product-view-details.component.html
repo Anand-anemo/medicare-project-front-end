@@ -41,7 +41,8 @@
             <div>
                 <button mat-raised-button color="warn" (click)="buyProduct(product.productId)">Buy now</button>
                 &nbsp;
-                <button mat-raised-button style="width: 200px;" (click)="addToCart(product.productId)">Add to Cart</button>
+                <button *ngIf="isLoggedIn()" mat-raised-button style="width: 200px;" (click)="addToCart(product.productId)">Add to Cart</button>
+                <button mat-raised-button style="width: 200px;" routerLink="/login">Add to Cart</button>
             </div>
 
         </div>

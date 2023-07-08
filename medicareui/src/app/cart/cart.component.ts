@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class CartComponent implements OnInit {
 
-  displayedColumns: string[] = ['Name', 'Description', 'Price', 'Discounted Price'];
+  displayedColumns: string[] = ['Name', 'Description', 'Price', 'Discounted Price' , 'Action'];
   // , 'Action'
 
   cartDetails: any[] = [];

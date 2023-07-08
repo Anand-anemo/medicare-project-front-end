@@ -24,6 +24,8 @@ export class UserService {
     });
   }
 
+  
+
   // public forUser() {
   //   return this.httpclient.get(this.PATH_OF_API + '/forUser', {
   //     responseType: 'text',

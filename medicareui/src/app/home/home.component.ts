@@ -6,6 +6,9 @@ import { Product } from '../model/product.model';
 import { ImageProcessingService } from '../image-processing.service';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { CategoryService } from '../services/category.service';
+import { Category } from '../model/category.model';
+
 
 @Component({
   selector: 'app-home',
@@ -18,13 +21,15 @@ export class HomeComponent implements OnInit {
   showLoadButton = false;
 
   productData = [];
+  categoryDetails: Category[];
 
   constructor(private productService: ProductService, private imageProcessingService: ImageProcessingService,
-    private router: Router) {
+    private router: Router , private categoryService: CategoryService) {
 
   }
   ngOnInit(): void {
     this.getProduct();
+    // this.getCategories();
   }
 
   searchByKeyword(searchkeyword) {
@@ -35,7 +40,7 @@ export class HomeComponent implements OnInit {
   }
 
   public getProduct(searchKey: string = "") {
-    this.productService.getProduct(this.pageNumber, searchKey)
+    this.productService.getActiveProduct(this.pageNumber, searchKey)
       .pipe(map((x: Product[], i) => x.map((product: Product) => this.imageProcessingService.createImages(product))))
       .subscribe({
         next: (res: any) => {
@@ -52,6 +57,19 @@ export class HomeComponent implements OnInit {
         complete: () => console.log('complete')
       });
   }
+
+  // public getCategories(){
+  //   this.categoryService.getCategories().subscribe({
+  //     next:(res:Category[]) => {console.log(res)
+  //       this.categoryDetails=res;
+      
+  //   },
+  //     error:(err)=>console.log(err),
+  //     complete:()=>console.log('done')
+  //      });
+
+  // }
+
 
 
   
@@ -89,6 +107,10 @@ export class HomeComponent implements OnInit {
     this.pageNumber = this.pageNumber + 1;
     this.getProduct();
   }
+
+  // public changeproduct(id){
+  //   this.router.navigate(['/',{id:id}]);
+  // }
 
 
 }

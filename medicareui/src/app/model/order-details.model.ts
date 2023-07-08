@@ -5,6 +5,7 @@ export interface OrderDetails {
     fullAddress: string;
     contactNumber: string;
     alternateContactNumber: string;
+    transactionId: string,
     
     orderProductQuantityList: OrderQuantity[];
 }

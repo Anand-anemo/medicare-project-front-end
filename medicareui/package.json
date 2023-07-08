@@ -26,7 +26,8 @@
     "sweetalert": "^2.1.2",
     "sweetalert2": "^11.7.12",
     "tslib": "^2.3.0",
-    "zone.js": "~0.12.0"
+    "zone.js": "~0.12.0",
+    "razorpay": "^2.8.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^15.1.4",

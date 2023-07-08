@@ -1,0 +1,40 @@
+
+
+<div class="row" >
+    
+
+    
+
+    <mat-grid-list cols="5" rowHeight="320px" gutterSize="10" class="grid mt-5">
+        <mat-grid-tile *ngFor="let p of  productData" class="tile">
+            <div class="row p-2">
+                <div class="image-container">
+                    <img class="home-page-product-image" [src]="p.productImages[0].url">
+                </div>
+
+                <div class="mt-2 ">
+                    <p><b>{{p.productName}}</b></p>
+                </div>
+                <div class="mt-1">
+                    <p style="white-space: inherit; height: 35px; width: 200px; overflow: hidden; text-overflow: ellipsis
+    ;">{{p.productDescription}}</p>
+
+                </div>
+                <div class="mt-2">
+                    <p><b>{{p.productDiscountedPrice | currency:'INR'}}</b> &nbsp; <i
+                            style="text-decoration: line-through;">{{p.productActualPrice |
+                            currency:'INR'}}</i></p>
+                </div>
+                <div class="mt-2"><button mat-raised-button color="warn"
+                        (click)="showProductDetails(p.productId)">View
+                        Details</button></div>
+
+
+
+
+            </div>
+
+        </mat-grid-tile>
+
+    </mat-grid-list> 
+</div>

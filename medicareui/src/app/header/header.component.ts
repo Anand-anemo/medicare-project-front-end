@@ -10,6 +10,7 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  
 
   constructor(
     private userAuthService: UserAuthService,
@@ -19,7 +20,12 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     
+    
   }
+
+  
+
+
 
   public isLoggedIn(){
     return this.userAuthService.isLoggedIn();

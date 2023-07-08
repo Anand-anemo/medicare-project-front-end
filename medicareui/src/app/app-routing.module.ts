@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
@@ -17,10 +17,32 @@ import { CategoryComponent } from './category/category.component';
 import { CategoryResolverService } from './services/category-resolver.service';
 import { RegisterComponent } from './register/register.component';
 import { CartComponent } from './cart/cart.component';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { ProductviewComponent } from './productview/productview.component';
+
+
+
+
 
 const routes: Routes = [
   {
-    path: '', component: HomeComponent
+    path: 'home', component: HomeComponent,
+    children:[
+      {
+        path: ':id',
+        component: ProductviewComponent
+      },
+      
+
+      
+     
+    ]
+   
+
+  },
+  {
+    path: '', redirectTo: '/home', pathMatch: 'full'
 
   },
   {
@@ -42,13 +64,13 @@ const routes: Routes = [
     }
   },
   {
-    path:'showProductDetails', component: ShowProductDetailsComponent
+    path:'showProductDetails', component: ShowProductDetailsComponent , canActivate:[AuthGuard], data:{roles:['Admin']}
   },
   {
     path:'productViewDetails' , component: ProductViewDetailsComponent ,  resolve: { product: ProductResolveService },
   },
   {
-    path:'buyProduct' , component: BuyProductComponent , resolve: {productDetails: BuyProductResolverService},
+    path:'buyProduct' , component: BuyProductComponent ,canActivate:[AuthGuard], data:{roles:['User']} ,resolve: {productDetails: BuyProductResolverService},
   },
   {
     path:'orderConfirm' , component: OrderConfirmationComponent
@@ -62,8 +84,15 @@ const routes: Routes = [
     path:'register' , component:RegisterComponent
   },
   {
-    path:'cart', component:CartComponent
-  }
+    path:'cart', component:CartComponent , canActivate:[AuthGuard], data:{roles:['User']}
+  },
+  {
+    path:'myorders', component:MyOrdersComponent , canActivate:[AuthGuard], data:{roles:['User']}
+  },
+  {
+    path:'sidenav', component:SidenavComponent
+   }
+  
   
 ];
 

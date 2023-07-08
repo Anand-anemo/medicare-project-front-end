@@ -3,11 +3,14 @@ import { Injectable } from '@angular/core';
 import { Product } from '../model/product.model';
 import { OrderDetails } from '../model/order-details.model';
 import { AddNewProductComponent } from '../add-new-product/add-new-product.component';
+import { MyOrderDetails } from '../model/order.model';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+  [x: string]: any;
 
   constructor(private httpClient:HttpClient) { }
 
@@ -34,6 +37,11 @@ export class ProductService {
   public getProductDetails(isSingleProductCheckout, productId) {
     return this.httpClient.get<Product[]>("http://localhost:8080/product/getProductDetails/"+isSingleProductCheckout+"/"+productId);
   }
+
+  public getProductByCategory(id){
+    return this.httpClient.get("http://localhost:8080/product/category/" + id);
+
+  }
   public placeOrder(orderDetails: OrderDetails , isCartCheckout) {
     return this.httpClient.post("http://localhost:8080/placeOrder/"+isCartCheckout, orderDetails);
   }
@@ -48,5 +56,20 @@ export class ProductService {
 
   public deleteCartItem(cartId) {
     return this.httpClient.delete("http://localhost:8080/deleteCartItem/"+cartId);
+  }
+
+  public getMyOrders(): Observable<MyOrderDetails[]> {
+    return this.httpClient.get<MyOrderDetails[]>("http://localhost:8080/getOrderDetails");
+  }
+  public createTransaction(amount) {
+    return this.httpClient.get("http://localhost:8080/createTransaction/"+amount);
+  }
+
+  public getActiveProduct(pageNumber , searchKeyword: string = ""){
+    return this.httpClient.get("http://localhost:8080/product/active?pageNumber=" + pageNumber+"&searchKey="+ searchKeyword);
+  }
+  public getActiveProductOfCategory(id){
+    return this.httpClient.get("http://localhost:8080/product/category/active/"+id);
+
   }
 }

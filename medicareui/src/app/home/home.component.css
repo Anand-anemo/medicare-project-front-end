@@ -26,5 +26,20 @@
 .tile{
     background-color:floralwhite;
 }
+.card-link{
+    color: darkgreen;
+    font-size: medium;
+}
+.card-title{
+    color: firebrick;
+}
+.container {
+    background-color: whitesmoke;
+}
+.carousel-caption{
+    color:black;
+    font-size:x-large;
+    background-color:lemonchiffon;
+}
 
    

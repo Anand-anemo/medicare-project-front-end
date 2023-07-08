@@ -1,0 +1,9 @@
+<mat-card>
+    <mat-action-list>
+        <div matSubheader><b><h2>Categories</h2></b></div>
+        <button mat-list-item [routerLink]="'/home/'+ cat.id"  *ngFor="let cat of categoryDetails"  >
+            <mat-icon mat-list-icon>list </mat-icon>{{cat.categoryName}}
+        </button>
+    </mat-action-list>
+</mat-card>
+<!--  (click)="Pcategory(cat.id)" -->

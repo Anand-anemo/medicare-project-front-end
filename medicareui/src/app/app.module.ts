@@ -38,6 +38,14 @@ import { ShowProductImageDialogComponent } from './show-product-image-dialog/sho
 import {MatDialogModule} from '@angular/material/dialog';
 import { RegisterComponent } from './register/register.component';
 import { CartComponent } from './cart/cart.component';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import {MatListModule} from '@angular/material/list';
+import { ProductviewComponent } from './productview/productview.component';
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +64,13 @@ import { CartComponent } from './cart/cart.component';
     ShowProductImageDialogComponent,
     RegisterComponent,
     CartComponent,
+    MyOrdersComponent,
+    SidenavComponent,
+    ProductviewComponent
+    
+    
+    
+    
    
   ],
   imports: [
@@ -76,7 +91,11 @@ import { CartComponent } from './cart/cart.component';
     MatSlideToggleModule,
     MatSelectModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatListModule
+    
+    
+   
     
     
 
